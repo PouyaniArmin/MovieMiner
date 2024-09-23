@@ -24,4 +24,4 @@ jobs:
       - name: Install dependencies
         run: composer install
       - name: Run tests
-        run: ./vendor/bin/phpunit --debug
+        run: vendor/bin/phpunit --debug
