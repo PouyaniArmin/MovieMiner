@@ -1,0 +1,27 @@
+name: PHP CI
+
+on:
+    push: 
+        branches: 
+            - main
+    pull_request: 
+        branches: 
+            - main
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Set Up PHP
+              uses: shivammathur//php-action@v2
+              with:
+                php-verison: '8.3'
+            - name: Install dependencies
+              run: composer install
+
+            - name: Run tests
+              run: vendor/bin/phpunit
+
