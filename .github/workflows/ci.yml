@@ -1,4 +1,4 @@
-name: PHP CI
+name: CI Pipeline
 
 on:
   push:
@@ -9,12 +9,25 @@ on:
       - main
 
 jobs:
-  build:
+  php-tests:
     runs-on: ubuntu-latest
 
     steps:
-        - uses: actions/checkout@v3
-        - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
-        - uses: php-actions/composer@v6
-        - run: echo "Composer dependencies have been installed"
-        - run: ./vendor/bin/phpunit
+      # Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up PHP
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v4
+        with:
+          php-version: '8.3'  # یا نسخه PHP مورد نیاز خود را اینجا وارد کنید
+          coverage: none
+      
+      # Install Composer dependencies
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      # Run PHPUnit tests
+      - name: Run tests
+        run: ./vendor/bin/phpunit --debug
