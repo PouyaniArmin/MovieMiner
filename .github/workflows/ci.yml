@@ -19,7 +19,7 @@ jobs:
 
       # Set up PHP
       - name: Set up PHP
-        uses: shivammathur/setup-php@v4
+        uses: shivammathur/setup-php@v3
         with:
           php-version: '8.3'  # یا نسخه PHP مورد نیاز خود را اینجا وارد کنید
           coverage: none
