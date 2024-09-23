@@ -13,14 +13,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-      - name: Install Composer dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-      - name: Run tests
-        run: vendor/bin/phpunit --debug
+        - uses: actions/checkout@v3
+        - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
+        - uses: php-actions/composer@v6
+        - run: echo "Composer dependencies have been installed"
+        - run: vendor/bin/phpunit
