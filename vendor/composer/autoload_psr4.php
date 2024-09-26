@@ -18,6 +18,7 @@ return array(
     'Config\\' => array($baseDir . '/config'),
     'App\\Services\\' => array($baseDir . '/app/services'),
     'App\\Models\\' => array($baseDir . '/app/models'),
+    'App\\Interfaces\\' => array($baseDir . '/app/interfaces'),
     'App\\Core\\' => array($baseDir . '/app/core'),
     'App\\Controllers\\' => array($baseDir . '/app/controllers'),
     'App\\' => array($baseDir . '/app'),

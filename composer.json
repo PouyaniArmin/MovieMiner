@@ -6,6 +6,7 @@
       "App\\Models\\": "app/models/",
       "App\\Controllers\\": "app/controllers/",
       "App\\Services\\": "app/services/",
+      "App\\Interfaces\\": "app/interfaces/",
       "Config\\": "config/"
     }
   },
