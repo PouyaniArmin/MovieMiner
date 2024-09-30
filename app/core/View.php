@@ -8,10 +8,6 @@ use function PHPUnit\Framework\exactly;
 
 class View
 {
-<<<<<<< HEAD
-
-=======
->>>>>>> feature/routing
     public string $layout = 'main';
     public function renderViews($view, $params = []): string
     {
