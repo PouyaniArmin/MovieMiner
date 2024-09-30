@@ -32,7 +32,7 @@ class RequestTest extends TestCase
         $methods = ['get', 'post'];
         foreach ($methods as $method) {
             $_SERVER['REQUEST_METHOD'] = $method;
-            $this->assertSame($method, $this->request->method());
+            $this->assertSame($method, $this->request->httpMethod());
 
             $this->assertTrue($this->request->isMethod($method), 'Failed asserting that the method is $method');
             foreach ($methods as $otherMethods) {

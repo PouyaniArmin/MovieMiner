@@ -5,7 +5,7 @@ namespace App\Interfaces;
 interface RequestInterface
 {
     public function path(): string;
-    public function method(): string;
+    public function httpMethod(): string;
     public function isGet(): bool;
     public function isPost(): bool;
     public function isPut(): bool;
