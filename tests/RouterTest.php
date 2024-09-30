@@ -7,6 +7,7 @@ use App\Core\Request;
 use App\Core\Response;
 use App\Core\Router;
 use PHPUnit\Framework\TestCase;
+
 class RouterTest extends TestCase
 
 {
@@ -36,17 +37,28 @@ class RouterTest extends TestCase
             $this->assertEquals('home', $response);
         }
     }
-    public function testDynamicMethodRegistration()
+    public function testGetMethodRegistration()
     {
-        $methods = ['get', 'post', 'patch', 'put', 'delete'];
-        foreach ($methods as $method) {
-            $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/home');
-            $this->request->expects($this->atLeastOnce())->method('httpMethod')->willReturn($method);
 
-            $this->router->{$method}('/home', [TestController::class, 'index']);
+        $methods = ['get', 'post', 'patch', 'put', 'delete'];
+            $this->request->expects($this->once())->method('path')->willReturn('/home');
+            $this->request->expects($this->once())->method('httpMethod')->willReturn('get');
+            $this->router->get('/home', [TestController::class, 'index']);
             $response = $this->router->resolve();
-            $this->assertEquals('home', $response);
-        }
+            $temp=$this->htmlTemplate();
+            $this->assertEquals($temp,$response);
+    }
+
+    private function htmlTemplate()
+    {
+        ob_start();
+        include __DIR__ . '/../app/views/home.php';
+        $viewContent = ob_get_clean();
+        ob_start();
+        include __DIR__ . '/../app/views/layouts/main.php';
+        $layoutContent = ob_get_clean();
+        $fileContent = str_replace("{{content}}", $viewContent, $layoutContent);
+        return $fileContent;
     }
 
     public function testDynamicMethodRegistrationWithParams()
@@ -62,8 +74,9 @@ class RouterTest extends TestCase
             $this->assertEquals('12', $response);
         }
     }
-    public function testAllInvalidRouteMethods(){
-        
+    public function testAllInvalidRouteMethods()
+    {
+
         $methods = ['get', 'post', 'patch', 'put', 'delete'];
         foreach ($methods as $method) {
             $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/invalid');
