@@ -8,7 +8,6 @@ use function PHPUnit\Framework\exactly;
 
 class View
 {
-
     public string $layout = 'main';
     public function renderViews($view, $params = []): string
     {

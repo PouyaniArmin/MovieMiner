@@ -7,8 +7,8 @@ use App\Core\Request;
 use App\Core\Response;
 use App\Core\Router;
 use PHPUnit\Framework\TestCase;
-
 class RouterTest extends TestCase
+
 {
     protected Request $request;
     protected Response $response;

@@ -42,7 +42,6 @@ class Router implements RouterInterface
         $this->routers['delete'][$path] = $callback;
     }
 
-
     public function resolve()
     {
         $path = $this->request->path();

@@ -1,5 +1,4 @@
 <?php 
-
 namespace App\Core;
 class Controller extends View{
     public function renderView($view,$params=[]){

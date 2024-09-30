@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Core;
 
 use App\Interfaces\RequestInterface;
