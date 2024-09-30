@@ -30,7 +30,7 @@ class Request implements RequestInterface
      *
      * @return string The request method in lowercase.
      */
-    public function method(): string
+    public function httpMethod(): string
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
@@ -75,7 +75,7 @@ class Request implements RequestInterface
      */
     public function isMethod(string $method): bool
     {
-        return $this->method() === strtolower($method);
+        return $this->httpMethod() === strtolower($method);
     }
     /**
      * Set the input for the request.
