@@ -27,4 +27,6 @@ jobs:
       # Install Composer dependencies
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
-      
+      # Run PHPUnit tests
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --configuration phpunit.xml
