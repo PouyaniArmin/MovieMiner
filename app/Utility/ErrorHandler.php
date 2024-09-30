@@ -1,5 +1,8 @@
 <?php
+<<<<<<< HEAD
 
+=======
+>>>>>>> feature/routing
 namespace App\Utility;
 
 use Exception;

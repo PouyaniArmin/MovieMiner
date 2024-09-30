@@ -6,7 +6,10 @@
       "App\\Models\\": "app/models/",
       "App\\Controllers\\": "app/controllers/",
       "App\\Services\\": "app/services/",
-      "Config\\": "config/"
+      "App\\Interfaces\\": "app/interfaces/",
+      "App\\Utility\\": "app/utility/",
+      "Config\\": "config/",
+      "Tests\\": "tests/"
     }
   },
   "autoload-dev": {
