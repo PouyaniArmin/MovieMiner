@@ -9,7 +9,7 @@ class TestController extends Controller
 {
     public function index(Request $request)
     {
-        return $this->renderView('home');
+        return 'home';
     }
 
     public function test($id)

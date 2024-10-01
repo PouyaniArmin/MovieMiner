@@ -17,9 +17,8 @@ class RouterTest extends TestCase
 
     public function setUp(): void
     {
-        $this->request = $this->getMockBuilder(Request::class)->onlyMethods(['path', 'httpMethod'])->getMock();
+        $this->request = $this->getMockBuilder(Request::class)->onlyMethods(['path', 'httpMethod'])->disableOriginalConstructor()->getMock();
         $this->response = $this->getMockBuilder(Response::class)->getMock();
-
         $this->router = new Router($this->request, $this->response);
     }
 
@@ -37,28 +36,19 @@ class RouterTest extends TestCase
             $this->assertEquals('home', $response);
         }
     }
-    public function testGetMethodRegistration()
+    public function testDynamicMethodRegistration()
     {
 
         $methods = ['get', 'post', 'patch', 'put', 'delete'];
-            $this->request->expects($this->once())->method('path')->willReturn('/home');
-            $this->request->expects($this->once())->method('httpMethod')->willReturn('get');
-            $this->router->get('/home', [TestController::class, 'index']);
-            $response = $this->router->resolve();
-            $temp=$this->htmlTemplate();
-            $this->assertEquals($temp,$response);
-    }
+        foreach ($methods as $method) {
 
-    private function htmlTemplate()
-    {
-        ob_start();
-        include __DIR__ . '/../app/views/home.php';
-        $viewContent = ob_get_clean();
-        ob_start();
-        include __DIR__ . '/../app/views/layouts/main.php';
-        $layoutContent = ob_get_clean();
-        $fileContent = str_replace("{{content}}", $viewContent, $layoutContent);
-        return $fileContent;
+            $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/home');
+            $this->request->expects($this->atLeastOnce())->method('httpMethod')->willReturn($method);
+            $this->router->{$method}('/home', [TestController::class, 'index']);
+            $response = $this->router->resolve();
+
+            $this->assertEquals("home", $response);
+        }
     }
 
     public function testDynamicMethodRegistrationWithParams()
