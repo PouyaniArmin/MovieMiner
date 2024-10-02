@@ -6,6 +6,7 @@ use App\Controllers\TestController;
 use App\Core\Request;
 use App\Core\Response;
 use App\Core\Router;
+use App\Core\View;
 use PHPUnit\Framework\TestCase;
 
 class RouterTest extends TestCase
@@ -36,20 +37,19 @@ class RouterTest extends TestCase
             $this->assertEquals('home', $response);
         }
     }
-    public function testDynamicMethodRegistration()
+
+    public function testGetRouterView()
     {
-
-        $methods = ['get', 'post', 'patch', 'put', 'delete'];
-        foreach ($methods as $method) {
-
-            $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/home');
-            $this->request->expects($this->atLeastOnce())->method('httpMethod')->willReturn($method);
-            $this->router->{$method}('/home', [TestController::class, 'index']);
-            $response = $this->router->resolve();
-
-            $this->assertEquals("home", $response);
-        }
+        $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/home');
+        $this->request->expects($this->atLeastOnce())->method('httpMethod')->willReturn('get');
+        $this->router->get('/home', function () {
+            $view = new View;
+            return $view->renderViews('home');
+        });
+        $response = $this->router->resolve();
+        $this->assertStringContainsString('<h1>Hello, world!</h1>', $response);
     }
+    
 
     public function testDynamicMethodRegistrationWithParams()
     {

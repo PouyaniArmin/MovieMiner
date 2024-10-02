@@ -17,13 +17,13 @@ class Request implements RequestInterface
      */
     public function path(): string
     {
-        $path = $_SERVER['REQUEST_URI'] ?? '/';
-        $path = htmlspecialchars($path);
-        $posstion = strpos($path, "?");
+        $url = $_SERVER['REQUEST_URI'];
+        $url = filter_var($url,FILTER_SANITIZE_SPECIAL_CHARS);
+        $posstion = strpos($url, "?");
         if ($posstion !== false) {
-            $path = substr($path, 0, $posstion);
+            $url = substr($url, 0, $posstion);
         }
-        return $path;
+        return !empty($url) ? $url : '/';
     }
     /**
      * Get the request method (GET, POST, etc.).

@@ -4,8 +4,6 @@ namespace App\Core;
 
 use App\Utility\ErrorHandler;
 
-use function PHPUnit\Framework\exactly;
-
 class View
 {
     public string $layout = 'main';
@@ -24,7 +22,8 @@ class View
         }
         ob_start();
         include_once $layoutPath;
-        return ob_get_clean();
+        $output = ob_get_clean();
+        return $output;
     }
     private function renderOnlyView($view, $params): string
     {
@@ -35,6 +34,7 @@ class View
         extract($params);
         ob_start();
         include_once $viewPath;
-        return ob_get_clean();
+        $output = ob_get_clean();
+        return $output;
     }
 }

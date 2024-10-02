@@ -9,10 +9,6 @@ use App\Core\Router;
 require_once __DIR__ . "/../vendor/autoload.php";
 $router = new Router(new Request,new Response);
 $app = new App($router);
-
 $app->router->get('/',[TestController::class,'index']);
-$app->router->get('/test/{id}',[TestController::class,'test']);
-$app->router->get('/home',function(){
-    return "home";
-});
+// $app->router->post('/post',function(){return "post";});
 $app->run();

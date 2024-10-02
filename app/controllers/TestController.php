@@ -11,6 +11,10 @@ class TestController extends Controller
     {
         return $this->renderView('home');
     }
+    public function store(Request $request){
+        // return $this->renderView('homePost');
+        return "s";
+    }
 
     public function test($id)
     {

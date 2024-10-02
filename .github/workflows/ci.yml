@@ -21,9 +21,12 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'  # یا نسخه PHP مورد نیاز خود را اینجا وارد کنید
+          php-version: '8.3'
           coverage: none
       
       # Install Composer dependencies
       - name: Install Composer dependencies
         run: composer install --prefer-dist --no-progress --no-suggest
+      # Run PHPUnit tests
+      - name: Run PHPUnit tests
+        run: vendor/bin/phpunit --configuration phpunit.xml
