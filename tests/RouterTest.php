@@ -49,7 +49,23 @@ class RouterTest extends TestCase
         $response = $this->router->resolve();
         $this->assertStringContainsString('<h1>Hello, world!</h1>', $response);
     }
-    
+    public function testPostRequestWithData(){
+        $_SERVER['REQUEST_METHOD']='POST';
+        $_SERVER['REQUEST_URI']="/submit";
+        $_POST['username'] = 'Armin';
+        $_POST['email'] = 'armin@example.com';
+
+        $this->request->expects($this->atLeastOnce())->method('path')->willReturn('/submit');
+        $this->request->expects($this->atLeastOnce())->method('httpMethod')->willReturn('post');
+        $this->router->post('/submit',function(){
+            $username=$_POST['username']??'';
+            $email=$_POST['email'] ?? '';
+            return "Username: $username, Email: $email";
+        });
+        $response=$this->router->resolve();
+        $this->assertEquals('Username: Armin, Email: armin@example.com',$response);
+
+    }
 
     public function testDynamicMethodRegistrationWithParams()
     {
