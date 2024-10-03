@@ -11,9 +11,9 @@ class TestController extends Controller
     {
         return $this->renderView('home');
     }
-    public function store(Request $request){
-        // return $this->renderView('homePost');
-        return "s";
+    public function store(Request $request)
+    {
+        return $this->renderView('homePost');
     }
 
     public function test($id)
